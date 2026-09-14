@@ -1,0 +1,180 @@
+# Chains & franchises to skip (they don't buy freelance services).
+# One brand per line, matched at the START of the business name (whole words, case-insensitive),
+# e.g. "Starbucks" catches "Starbucks Coffee - Mitte" but not "Cafe Starbucks Lovers".
+# Add your own anytime. Lines starting with # are ignored.
+# Chains not listed here are still caught automatically when the same name or website
+# shows up at several locations in your search.
+
+# --- Coffee & cafes ---
+Starbucks
+Costa Coffee
+Tim Hortons
+Dunkin
+Dunkin Donuts
+Caffe Nero
+Pret A Manger
+Gloria Jeans
+The Coffee Club
+Second Cup
+Peets Coffee
+Dutch Bros
+Caribou Coffee
+Coffee Bean & Tea Leaf
+Black Sheep Coffee
+Blank Street
+Gail's Bakery
+Le Pain Quotidien
+Einstein Kaffee
+Balzac Coffee
+Coffee Fellows
+Tchibo
+Bäckerei Kamps
+Back Werk
+Joe & The Juice
+Espresso House
+Luckin Coffee
+Cotti Coffee
+Tim Ho Wan
+Cafe Coffee Day
+Third Wave Coffee
+Chaayos
+Blue Tokai
+Krispy Kreme
+Cinnabon
+Paris Baguette
+Tous Les Jours
+Greggs
+Au Bon Pain
+Panera Bread
+Bagel Brothers
+Boost Juice
+Jamba
+Mixue
+Chatime
+Gong Cha
+Tealive
+Bubbleology
+Baskin Robbins
+Haagen Dazs
+Cold Stone Creamery
+Dairy Queen
+
+# --- Fast food & restaurant chains ---
+McDonalds
+KFC
+Subway
+Burger King
+Hungry Jacks
+Wendys
+Taco Bell
+Popeyes
+Five Guys
+Shake Shack
+Chipotle
+Dominos
+Pizza Hut
+Papa Johns
+Little Caesars
+Nandos
+Wagamama
+Itsu
+Wingstop
+Chick fil A
+Jollibee
+Carls Jr
+Hardees
+Arbys
+Sonic Drive In
+Jack in the Box
+In N Out
+Olive Garden
+Applebees
+TGI Fridays
+Hard Rock Cafe
+Denny's
+IHOP
+Barbeque Nation
+Haldirams
+Wow Momo
+Faasos
+Behrouz Biryani
+
+# --- Grocery, supermarkets & convenience ---
+Walmart
+Costco
+Target Store
+Kroger
+Whole Foods
+Trader Joes
+Safeway
+Publix
+Aldi
+Lidl
+Tesco
+Sainsburys
+Asda
+Morrisons
+Waitrose
+Co op
+Carrefour
+Spar
+Woolworths
+Coles
+IGA
+Loblaws
+No Frills
+Sobeys
+Lulu Hypermarket
+Spinneys
+Choithrams
+7 Eleven
+Circle K
+FamilyMart
+Lawson
+Wawa
+Reliance Fresh
+Reliance Smart
+DMart
+Big Bazaar
+Spencers
+More Supermarket
+Nature's Basket
+
+# --- Healthcare chains ---
+Apollo Hospitals
+Apollo Clinic
+Apollo Pharmacy
+Fortis
+Max Healthcare
+Manipal Hospitals
+Medanta
+Aster Hospital
+Aster Clinic
+NMC Healthcare
+Mediclinic
+HCA Healthcare
+Kaiser Permanente
+CVS
+Walgreens
+Boots Pharmacy
+Superdrug
+Guardian Pharmacy
+Watsons
+
+# --- Gyms, salons & others ---
+Anytime Fitness
+Planet Fitness
+Gold's Gym
+Snap Fitness
+F45
+Orangetheory
+PureGym
+The Gym Group
+Cult fit
+Lakme Salon
+Toni & Guy
+Supercuts
+Great Clips
+Sport Clips
+Regus
+WeWork
