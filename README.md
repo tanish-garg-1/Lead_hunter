@@ -29,7 +29,32 @@ Fill in `.env` (copy it from `.env.example` if it's missing):
 
 The app also counts its own requests and stops at `MONTHLY_REQUEST_LIMIT` (default 900). One request returns up to 20 businesses, so 50 leads a day is about 3–6 requests.
 
-No Google key? The app falls back to free OpenStreetMap data, which has fewer phones and websites and no ratings.
+No Google key? The app uses free data instead.
+
+## Data sources
+
+| Source | Cost | Notes |
+|---|---|---|
+| `google` | Free up to the monthly cap (needs a billing account) | Most complete, especially in India. India-based billing gets a bigger free allowance (7,000 Text Search Enterprise requests/month) when most usage is in India. |
+| `overture` | Free, no account | Overture Maps (mostly Meta business pages): phones, websites, emails, social links. Tiles are downloaded once per monthly release into `data/overture/`; the first download of an area can take a minute. |
+| `osm` | Free, no account | OpenStreetMap: fewer contacts; public servers are sometimes busy (the app tries mirrors). |
+
+The app runs without Google: **Overture is the default** (in the Sept 2026 check it found 2–10× more contactable cafes than OpenStreetMap in Gurugram, Delhi, Lisbon and Portland). To change it, edit `.env`:
+```
+DATA_SOURCE_DEFAULT=overture
+DATA_SOURCE_BY_COUNTRY=
+```
+If a country is set to `google` and there's no key, `DATA_SOURCE_DEFAULT` is used and the app says so.
+
+### Which source is best for your area? Measure it
+```bash
+.venv\Scripts\python.exe tools\coverage_check.py --domain cafe --enrich 20
+```
+- Compares Overture and OpenStreetMap on 2 Indian and 2 foreign areas (or your own, via `--area "Sector 29, Gurugram, India"`).
+- Reports places found, contacts, overlap and chains.
+- `--enrich 20` also runs the real website check on a sample.
+- For a completeness check, list ~20 places per area that you see on Google Maps in `data/coverage_truth.csv` (`area,name`); the report shows how many each source found.
+- Results are saved to `data/coverage_report.md`.
 
 ## Run
 

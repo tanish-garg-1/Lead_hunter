@@ -157,6 +157,64 @@ def test_chain_and_contact_filters(tmp):
     conn.close()
 
 
+def test_overture_helpers(tmp):
+    import json as _json
+    import re
+    import time as _time
+    from lead_hunter import overture
+
+    cafe = re.compile(overture.category_regex("cafe"))
+    assert cafe.search("coffee_shop|") and cafe.search("asian_restaurant|indian_restaurant|cafe")
+    assert not cafe.search("cafeteria|") and not cafe.search("restaurant|bar")
+    assert re.search(overture.category_regex("florist"), "florist|"), "unknown types match by word"
+
+    box = (38.70, -9.17, 38.74, -9.12)
+    tiles = [overture.tile_box(t) for t in overture.tiles_for(box)]
+    assert min(t[0] for t in tiles) <= 38.70 and max(t[2] for t in tiles) >= 38.74
+    assert min(t[1] for t in tiles) <= -9.17 and max(t[3] for t in tiles) >= -9.12
+
+    row = {  # shape of a real Overture row (Connaught Place, seen live)
+        "id": "abc", "name": "Cafe 14", "phones": ["+919212142245"], "websites": ["https://instagram.com/cafe14"],
+        "emails": None, "socials": ["https://www.facebook.com/1333832056691416"], "brand": None,
+        "addresses": [{"freeform": "14, KG Marg", "locality": "New Delhi", "postcode": "110001"}],
+        "operating_status": None, "lat": 28.63, "lng": 77.22,
+    }
+    place = overture.normalize_row(row)
+    assert place["place_id"] == "ovt:abc" and place["phone"] == "+919212142245"
+    assert place["facebook"].endswith("1333832056691416") and place["instagram"] == "https://instagram.com/cafe14"
+    assert place["website"] == "", "an Instagram link isn't a real website"
+    assert place["postcode"] == "110001" and place["brand"] is False and not place["closed"]
+    assert "Cafe+14" in place["maps_link"] and filters.has_contact(place)
+    assert overture.normalize_row({**row, "brand": "Starbucks"})["brand"] is True
+
+    # Cached tiles are served without touching the network, clipped to the requested square.
+    provider = overture.OvertureProvider(tmp / "ovt")
+    (tmp / "ovt").mkdir()
+    (tmp / "ovt" / "release.json").write_text(_json.dumps({"release": "test", "checked": _time.time()}))
+    regex = overture.category_regex("cafe")
+    for t in overture.tiles_for(box):
+        south, west, north, east = overture.tile_box(t)
+        folder = tmp / "ovt" / "test" / overture.hashlib.md5(regex.encode()).hexdigest()[:10]
+        folder.mkdir(parents=True, exist_ok=True)
+        inside = {**place, "place_id": f"in{t}", "lat": (south + north) / 2, "lng": (west + east) / 2}
+        (folder / f"{t[0]}_{t[1]}.json").write_text(_json.dumps([inside]))
+    got, saturated = provider.search_box("cafe", box, True)
+    assert not saturated and all(box[0] <= p["lat"] < box[2] and box[1] <= p["lng"] < box[3] for p in got)
+    assert provider._db is None, "no DuckDB connection needed for cached tiles"
+
+
+def test_source_routing():
+    from lead_hunter import cli
+    routes = cli.parse_routes("India:google, portugal : overture")
+    assert routes == {"india": "google", "portugal": "overture"}
+    cfg = {"google_key": "", "source_default": "overture", "source_by_country": routes}
+    assert cli.choose_source(cfg, "India")[0] == "overture" and "No GOOGLE_PLACES_API_KEY" in cli.choose_source(cfg, "India")[1]
+    assert cli.choose_source({**cfg, "google_key": "k"}, "india") == ("google", "")
+    assert cli.choose_source(cfg, "United States") == ("overture", "")
+    assert cli.choose_source({**cfg, "source_default": "google"}, "Spain")[0] == "osm", "default google without key"
+    assert cli.choose_source({**cfg, "source_default": "bing"}, "Spain")[0] == "osm"
+
+
 def test_geo_helpers():
     square = [[(13.0, 52.0), (14.0, 52.0), (14.0, 53.0), (13.0, 53.0), (13.0, 52.0)]]
     assert geo.inside_city(square, 13.5, 52.5)
@@ -290,6 +348,8 @@ if __name__ == "__main__":
         test_batches_dedup_and_sync(Path(tmp))
         test_chain_and_contact_filters(Path(tmp))
         test_geo_helpers()
+        test_source_routing()
+        test_overture_helpers(Path(tmp))
         calls = test_city_hunt(Path(tmp))
         print(f"City hunt covered every independent cafe in the fake city using {calls} map searches")
     test_website_analysis()

@@ -40,7 +40,33 @@ def load_config():
         "groq_key": os.getenv("GROQ_API_KEY", "").strip(),
         "groq_model": os.getenv("GROQ_MODEL", "").strip() or discuss.DEFAULT_MODEL,
         "monthly_limit": limit,
+        "source_default": os.getenv("DATA_SOURCE_DEFAULT", "overture").strip().lower() or "overture",
+        "source_by_country": parse_routes(os.getenv("DATA_SOURCE_BY_COUNTRY", "")),
     }
+
+
+SOURCES = ("google", "overture", "osm")
+
+
+def parse_routes(text):
+    """'india:google, portugal:overture' -> {'india': 'google', 'portugal': 'overture'}"""
+    routes = {}
+    for pair in (text or "").split(","):
+        if ":" in pair:
+            country, source = pair.split(":", 1)
+            routes[country.strip().lower()] = source.strip().lower()
+    return routes
+
+
+def choose_source(cfg, country):
+    """Which data source to use for a country. Returns (source, warning or '')."""
+    wanted = cfg["source_by_country"].get((country or "").strip().lower(), cfg["source_default"])
+    if wanted not in SOURCES:
+        return "osm", f"Unknown data source '{wanted}' in .env (use google, overture or osm): using osm."
+    if wanted == "google" and not cfg["google_key"]:
+        fallback = cfg["source_default"] if cfg["source_default"] in ("overture", "osm") else "osm"
+        return fallback, f"No GOOGLE_PLACES_API_KEY for {country}: using {fallback} instead."
+    return wanted, ""
 
 
 # ---------- Excel sync / export ----------
@@ -169,10 +195,15 @@ def discuss_target(cfg, force_mode=None):
 
 # ---------- shared pipeline ----------
 
-def get_provider(cfg, conn):
-    if cfg["google_key"]:
+def get_provider(cfg, conn, country):
+    source, warning = choose_source(cfg, country)
+    if warning:
+        console.print(f"[yellow]{warning}[/]")
+    if source == "google":
         return GooglePlacesProvider(cfg["google_key"], conn, cfg["monthly_limit"])
-    console.print("[yellow]No GOOGLE_PLACES_API_KEY in .env: using free OpenStreetMap data (fewer phones/websites, no ratings).[/]")
+    if source == "overture":
+        from .overture import OvertureProvider  # needs duckdb; only imported when used
+        return OvertureProvider(ROOT / "data" / "overture")
     return OSMProvider()
 
 
@@ -304,7 +335,7 @@ class Search:
 
 
 def run_search(conn, cfg, target):
-    provider = get_provider(cfg, conn)
+    provider = get_provider(cfg, conn, target["country"])
     export_pending(conn)
 
     wanted = target["count"]
@@ -359,7 +390,8 @@ def start_hunt(conn, cfg, place):
             return None
     hunt_id = hunt.create_hunt(conn, place["domain"], place["city"], place["country"], city_geo)
     p = hunt.progress(conn, hunt_id)
-    source = "Google" if cfg["google_key"] else "OpenStreetMap (free, no Google key set)"
+    source = {"google": "Google", "overture": "Overture Maps (free)", "osm": "OpenStreetMap (free)"}[
+        choose_source(cfg, place["country"])[0]]
     console.print(Panel(
         f"Found [bold]{city_geo['name']}[/]\n"
         f"The city is split into {p['pending_cells']} map squares (~{p['total_km2']:.0f} km²). Central squares go first; "
@@ -396,7 +428,8 @@ def show_hunt_progress(conn, hunt_id):
 def run_hunt(conn, cfg, hunt_id, count):
     export_pending(conn)
     detector = filters.ChainDetector(filters.load_chain_names(CHAINS_PATH))
-    h = hunt.Hunt(conn, hunt_id, get_provider(cfg, conn), detector, log=console.print)
+    provider = get_provider(cfg, conn, hunt.get_hunt(conn, hunt_id)["country"])
+    h = hunt.Hunt(conn, hunt_id, provider, detector, log=console.print)
     owner_fn = make_owner_fn(cfg)
     kept = []
 

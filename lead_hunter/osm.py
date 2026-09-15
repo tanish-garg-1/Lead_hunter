@@ -4,12 +4,11 @@ import time
 
 import requests
 
+from . import geo
 from .places import PlacesError
 
-NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 USER_AGENT = "LeadHunter/1.0 (local business research)"
-MIN_HALF_SIZE_DEG = 0.01  # ~1 km: small sectors often geocode to a single point
 
 OSM_TAGS = {
     "cafe": ['"amenity"="cafe"'],
@@ -78,7 +77,11 @@ class OSMProvider:
     name = "OpenStreetMap (free)"
 
     def search(self, domain, area, city, country):
-        yield from self._query(self._tags(domain), self._bbox(f"{area}, {city}, {country}"))
+        try:
+            box = geo.area_bbox(f"{area}, {city}, {country}")
+        except geo.GeoError as exc:
+            raise PlacesError(str(exc)) from exc
+        yield from self._query(self._tags(domain), box)
 
     def search_box(self, domain, box, can_split):
         """OpenStreetMap has no result cap, so a square is never 'saturated'."""
@@ -129,21 +132,3 @@ class OSMProvider:
                 "suburb": t.get("addr:suburb") or t.get("addr:district") or "",
             }
 
-    @staticmethod
-    def _bbox(place):
-        try:
-            resp = requests.get(
-                NOMINATIM_URL, params={"q": place, "format": "json", "limit": 1},
-                headers={"User-Agent": USER_AGENT}, timeout=20,
-            )
-            resp.raise_for_status()
-            results = resp.json()
-        except (requests.RequestException, ValueError) as exc:
-            raise PlacesError(f"Couldn't look up '{place}' on OpenStreetMap: {exc}") from exc
-        if not results:
-            raise PlacesError(f"OpenStreetMap couldn't find '{place}'. Try a different spelling.")
-        south, north, west, east = (float(v) for v in results[0]["boundingbox"])
-        lat, lng = (south + north) / 2, (west + east) / 2
-        half_lat = max((north - south) / 2, MIN_HALF_SIZE_DEG)
-        half_lng = max((east - west) / 2, MIN_HALF_SIZE_DEG)
-        return lat - half_lat, lng - half_lng, lat + half_lat, lng + half_lng

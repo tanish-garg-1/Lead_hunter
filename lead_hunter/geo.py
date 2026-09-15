@@ -44,6 +44,29 @@ def locate_city(city, country):
     }
 
 
+AREA_MIN_HALF_DEG = 0.01  # ~1 km: small sectors often geocode to a single point
+
+
+def area_bbox(place):
+    """Box (south, west, north, east) around a named area like 'Sector 29, Gurugram, India', at least ~2 km wide."""
+    try:
+        resp = requests.get(
+            NOMINATIM_URL, params={"q": place, "format": "json", "limit": 1},
+            headers={"User-Agent": USER_AGENT}, timeout=20,
+        )
+        resp.raise_for_status()
+        results = resp.json()
+    except (requests.RequestException, ValueError) as exc:
+        raise GeoError(f"Couldn't look up '{place}' on OpenStreetMap: {exc}") from exc
+    if not results:
+        raise GeoError(f"OpenStreetMap couldn't find '{place}'. Try a different spelling.")
+    south, north, west, east = (float(v) for v in results[0]["boundingbox"])
+    lat, lng = (south + north) / 2, (west + east) / 2
+    half_lat = max((north - south) / 2, AREA_MIN_HALF_DEG)
+    half_lng = max((east - west) / 2, AREA_MIN_HALF_DEG)
+    return lat - half_lat, lng - half_lng, lat + half_lat, lng + half_lng
+
+
 def neighbourhood_name(lat, lng):
     """Neighbourhood at a point via free Nominatim reverse lookup (their limit: 1 request/second). '' on failure."""
     time.sleep(1)
