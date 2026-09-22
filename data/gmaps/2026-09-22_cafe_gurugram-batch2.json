@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Harajuku Tokyo Cafe",
+    "address": "Ambience Mall 3, Ambience Island, DLF Phase 3, Sector 24, Gurugram, Haryana 122002",
+    "phone": "+91 9560709102",
+    "website": "",
+    "rating": 4.1,
+    "reviews": 386,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Harajuku+Tokyo+Cafe+Ambience+Mall+DLF+Phase+3+Gurugram"
+  },
+  {
+    "name": "Healthy adda- DLF phase 3",
+    "address": "37, Galli No. 15, U Block, DLF Phase 3, Sector 24, Gurugram, Haryana 122002",
+    "phone": "+91 8130290324",
+    "website": "",
+    "rating": 4.9,
+    "reviews": 37,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Healthy+Adda+DLF+Phase+3+Gurugram"
+  },
+  {
+    "name": "Pour and Palate | Coffee and Cuisine",
+    "address": "1st Floor, B-65, opposite Vipul Square, Sushant Lok Phase I, Sector 43, Gurugram, Haryana 122002",
+    "phone": "+91 8527888903",
+    "website": "https://pourandpalate.com/",
+    "rating": 4.8,
+    "reviews": 1001,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Pour+and+Palate+Sushant+Lok+1+Gurugram"
+  },
+  {
+    "name": "Cafe AURIKA",
+    "address": "C-14, Block C, Sushant Lok Phase I, Sector 43, Gurugram, Haryana 122003",
+    "phone": "+91 8826002788",
+    "website": "https://aurikacafeggn.lovable.app/",
+    "rating": 4.2,
+    "reviews": 1024,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+AURIKA+Sushant+Lok+1+Gurugram"
+  },
+  {
+    "name": "Garden Lovers Botanical Boutique And Cafe",
+    "address": "The Plaza Mall, Mehrauli-Gurgaon Rd, Sector 28, Sushant Lok Phase I, Gurugram, Haryana 122009",
+    "phone": "+91 9958500585",
+    "website": "http://www.gardenlovers.in/",
+    "rating": 4.3,
+    "reviews": 1072,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Garden+Lovers+Botanical+Boutique+Cafe+Gurugram"
+  },
+  {
+    "name": "Sakley's The Mountain Cafe",
+    "address": "SF-93, DLF, Galleria Market, Sector 28, DLF Phase IV, Gurugram, Haryana 122009",
+    "phone": "+91 9899996737",
+    "website": "",
+    "rating": 4.4,
+    "reviews": 798,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Sakleys+The+Mountain+Cafe+Galleria+Market+Gurugram"
+  },
+  {
+    "name": "The Cafict",
+    "address": "Shop no. H8, Ground floor, Sushant shopping arcade, Sushant Lok Phase I, Sector 43, Gurugram, Haryana 122009",
+    "phone": "+91 9319419098",
+    "website": "",
+    "rating": 5.0,
+    "reviews": 258,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=The+Cafict+Sushant+Lok+1+Gurugram"
+  },
+  {
+    "name": "TASTEERA RESTAURANT & CAFE",
+    "address": "First Floor, Huda Market, SCO No. 40, Sector 31, Gurugram, Haryana 122001",
+    "phone": "+91 9217534918",
+    "website": "http://tasteera.in/",
+    "rating": 4.8,
+    "reviews": 480,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Tasteera+Restaurant+Cafe+Sector+31+Gurugram"
+  },
+  {
+    "name": "Another Fine Day Cafe & Reading Room",
+    "address": "Ground Floor, Golf Course Rd, DLF Phase 5, Sector 43, Gurugram, Haryana 122009",
+    "phone": "+91 1244386155",
+    "website": "http://www.anotherfineday.net/",
+    "rating": 4.4,
+    "reviews": 1749,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Another+Fine+Day+Cafe+Golf+Course+Road+Gurugram"
+  },
+  {
+    "name": "Nowhere Terrace BrewPub Cafe",
+    "address": "2nd, Crosspoint Mall, opposite Hamilton Court Road, Galleria Market, Sector 28, DLF Phase IV, Gurugram, Haryana 122009",
+    "phone": "+91 9205050770",
+    "website": "https://m.facebook.com/NowhereBrewpub/",
+    "rating": 4.2,
+    "reviews": 2767,
+    "area": "Sushant Lok 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Nowhere+Terrace+BrewPub+Cafe+Crosspoint+Mall+Gurugram"
+  },
+  {
+    "name": "Cafe By Soul | Best Outdoor Cafe",
+    "address": "B-11/1, Ashoka Cresent Marg, DLF Phase 1, Sector 26A, Gurugram, Haryana 122002",
+    "phone": "+91 8826856001",
+    "website": "http://www.cafebysoul.com/",
+    "rating": 4.3,
+    "reviews": 1391,
+    "area": "South City 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+By+Soul+DLF+Phase+1+Gurugram"
+  },
+  {
+    "name": "Bloom Cafe | Signature Towers",
+    "address": "No.23, B1 Block, Main St, near Hector Beverages, South City I, Sector 30, Gurugram, Haryana 122001",
+    "phone": "+91 1244109228",
+    "website": "https://staybloom.com/hotels/gurugram/bloom-boutique-signature-towers",
+    "rating": 4.0,
+    "reviews": 9,
+    "area": "South City 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Bloom+Cafe+Signature+Towers+Gurugram"
+  },
+  {
+    "name": "Cafe De Flora",
+    "address": "GF-31 - GF38, Aipl Joy Central, Sector 65, Gurugram, Haryana 122101",
+    "phone": "+91 8448441840",
+    "website": "",
+    "rating": 4.6,
+    "reviews": 821,
+    "area": "South City 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+De+Flora+Sector+65+Gurugram"
+  },
+  {
+    "name": "abcoffee Unitech Business Park",
+    "address": "Unit No.007, Unitech Business Park, Sector 17-B, Block F, South City I, Sector 41, Gurugram, Haryana 122003",
+    "phone": "+91 9217844049",
+    "website": "https://www.abcoffee.in/our-decks",
+    "rating": 4.9,
+    "reviews": 69,
+    "area": "South City 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=abcoffee+Unitech+Business+Park+Gurugram"
+  },
+  {
+    "name": "Thamel, Arjun Marg",
+    "address": "Shop No. 139, The Shopping Mall, Arjun Marg, Block E, DLF Phase 1, Sector 26A, Gurugram, Haryana 122002",
+    "phone": "+91 9667930088",
+    "website": "https://www.thamel.in/",
+    "rating": 4.8,
+    "reviews": 227,
+    "area": "DLF Phase 1",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Thamel+Arjun+Marg+DLF+Phase+1+Gurugram"
+  },
+  {
+    "name": "The Big Tree Gurgaon",
+    "address": "Pillar 174, Golf Course Rd, opposite Rapid Metro, Suncity, Sector 53, Gurugram, Haryana 122011",
+    "phone": "+91 8183959595",
+    "website": "",
+    "rating": 4.5,
+    "reviews": 4975,
+    "area": "Golf Course Road",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=The+Big+Tree+Gurgaon+Golf+Course+Road"
+  },
+  {
+    "name": "Ququ Cafe",
+    "address": "Golf Course Rd, Horizon Colony, Sector 43, Gurugram, Haryana 122009",
+    "phone": "+91 8826059898",
+    "website": "http://www.ququcafe.in/",
+    "rating": 4.8,
+    "reviews": 136,
+    "area": "Golf Course Road",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Ququ+Cafe+Golf+Course+Road+Gurugram"
+  },
+  {
+    "name": "Chelvies Coffee | Gurugram | Golf Course Rd.",
+    "address": "Shop No. 12, Ground Floor, Golf Course Rd, Parsvnath Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011",
+    "phone": "+91 8287814194",
+    "website": "https://www.chelviescoffee.com/",
+    "rating": 4.6,
+    "reviews": 644,
+    "area": "Golf Course Road",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Chelvies+Coffee+Golf+Course+Road+Gurugram"
+  },
+  {
+    "name": "The Forestta",
+    "address": "Saraswati Kunj, Plot No 27, Golf Course Rd, opposite Alchemist Hospital, Suncity, Sector 54, Gurugram, Haryana 122003",
+    "phone": "+91 8988282828",
+    "website": "https://theforesttacafe.com/",
+    "rating": 4.2,
+    "reviews": 6286,
+    "area": "Golf Course Road",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=The+Forestta+Golf+Course+Road+Gurugram"
+  },
+  {
+    "name": "Cafe Amaretto",
+    "address": "South Point Mall, LG 008, Golf Course Rd, Sector 53, Gurugram, Haryana 122011",
+    "phone": "+91 1247177357",
+    "website": "https://amaretto.in/",
+    "rating": 4.2,
+    "reviews": 393,
+    "area": "Golf Course Road",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+Amaretto+South+Point+Mall+Gurugram"
+  }
+]

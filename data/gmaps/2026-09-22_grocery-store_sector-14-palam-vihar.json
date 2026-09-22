@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Angel South Indian Store",
+    "address": "New Mata Mandir Rd, Sanjay Gram Colony, Rajiv Nagar, Sector 14, Gurugram, Haryana 122001",
+    "phone": "+91 9999858287",
+    "website": "https://indianhealthyrecipe.com/",
+    "rating": 4.3,
+    "reviews": 103,
+    "area": "Sector 14 Market",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Angel+South+Indian+Store+Sector+14+Gurugram"
+  },
+  {
+    "name": "Durga Departmental Store",
+    "address": "SCO 87/88, Basement of Dominos, Sector 14, Gurugram, Haryana 122007",
+    "phone": "+91 9999920296",
+    "website": "",
+    "rating": 4.3,
+    "reviews": 67,
+    "area": "Sector 14 Market",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Durga+Departmental+Store+Sector+14+Gurugram"
+  },
+  {
+    "name": "Shree Samrat Confectioners",
+    "address": "Shop No. 34-35, Sector 14 Main Rd, DLF Colony, Sector 14, Gurugram, Haryana 122007",
+    "phone": "+91 1242335271",
+    "website": "",
+    "rating": 4.2,
+    "reviews": 17,
+    "area": "Sector 14 Market",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Shree+Samrat+Confectioners+Sector+14+Gurugram"
+  },
+  {
+    "name": "Anoop",
+    "address": "near Om Sweets, DLF Colony, Sector 14, Gurugram, Haryana 122007",
+    "phone": "+91 9990895921",
+    "website": "",
+    "rating": 5.0,
+    "reviews": 2,
+    "area": "Sector 14 Market",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Anoop+grocery+near+Om+Sweets+Sector+14+Gurugram"
+  },
+  {
+    "name": "TODAYZ BAZAAR",
+    "address": "A-7 Extension, opposite Power House, Choma, Dharam Colony, Palam Vihar, Gurugram, Haryana 122017",
+    "phone": "+91 9311011650",
+    "website": "",
+    "rating": 4.3,
+    "reviews": 234,
+    "area": "Palam Vihar Market",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=TODAYZ+BAZAAR+Palam+Vihar+Gurugram"
+  }
+]

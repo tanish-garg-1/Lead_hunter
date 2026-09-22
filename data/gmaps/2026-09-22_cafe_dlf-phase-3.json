@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Cafe Indian Roots",
+    "address": "Ambience Island, DLF Phase 3, Sector 24, Gurugram, Haryana 122010",
+    "phone": "+91 8851583654",
+    "website": "",
+    "rating": 4.9,
+    "reviews": 2005,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+Indian+Roots+Ambience+Island+DLF+Phase+3+Sector+24+Gurugram"
+  },
+  {
+    "name": "Dribble Cafe",
+    "address": "Plot 1, Near Metro Pillar 142, Moulsari Ave, DLF Phase 3, Gurugram, Haryana 122002",
+    "phone": "+91 1247178600",
+    "website": "",
+    "rating": 4.0,
+    "reviews": 943,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Dribble+Cafe+Moulsari+Ave+DLF+Phase+3+Gurugram"
+  },
+  {
+    "name": "Cafe Aroma Beans",
+    "address": "Road no 1, U Block, DLF Phase 3, Sector 24, Gurugram, Haryana 122002",
+    "phone": "+91 9958411163",
+    "website": "",
+    "rating": 4.9,
+    "reviews": 22,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+Aroma+Beans+U+Block+DLF+Phase+3+Gurugram"
+  },
+  {
+    "name": "Cafe Jalapeno",
+    "address": "Upper ground floor, Commercial complex 212, U Block, DLF Phase 3, Gurugram, Haryana 122010",
+    "phone": "+91 9873644333",
+    "website": "",
+    "rating": 5.0,
+    "reviews": 41,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=Cafe+Jalapeno+U+Block+DLF+Phase+3+Gurugram"
+  },
+  {
+    "name": "DiGhent Cafe",
+    "address": "Level 2, Crosspoint Mall 208, opposite Galleria Market, Sector 28, DLF Phase IV, Gurugram, Haryana 122002",
+    "phone": "+91 9289231133",
+    "website": "https://www.dighent.com/",
+    "rating": 4.4,
+    "reviews": 2773,
+    "area": "DLF Phase 3",
+    "maps_link": "https://www.google.com/maps/search/?api=1&query=DiGhent+Cafe+Crosspoint+Mall+DLF+Phase+IV+Gurugram"
+  }
+]
