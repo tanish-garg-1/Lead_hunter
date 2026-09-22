@@ -203,6 +203,49 @@ def test_overture_helpers(tmp):
     assert provider._db is None, "no DuckDB connection needed for cached tiles"
 
 
+def test_gmaps_import(tmp):
+    import argparse
+    import json as _json
+    sys.path.insert(0, str(ROOT / "tools"))
+    import leads as leads_tool
+    from lead_hunter import cli
+
+    link = "https://www.google.com/maps/place/Blue+Door/data=!3m1!4b1!4m6!3m5!1s0x390d1:0xabc123!8m2!3d28.4677!4d77.0617"
+    place = leads_tool.to_place({"name": " Blue Door Cafe ", "maps_link": link, "rating": "4,6", "reviews": "(1,234)"})
+    assert place["place_id"] == "gm:0x390d1:0xabc123" and place["rating"] == 4.6 and place["reviews"] == 1234
+    assert (place["lat"], place["lng"]) == (28.4677, 77.0617) and place["name"] == "Blue Door Cafe"
+    assert leads_tool.to_place({"name": "X"})["place_id"].startswith("gm:"), "no link -> stable hash id"
+
+    items = [
+        {"name": "Blue Door Cafe", "phone": "+91 98100 11111", "maps_link": link, "area": "Sector 29"},
+        {"name": "Blue Door Cafe", "phone": "+91 98100 11111", "maps_link": link, "area": "Sector 29"},  # listed twice
+        {"name": "Starbucks Coffee", "phone": "+91 98100 22222", "area": "Sector 29"},                   # chain
+        {"name": "Quiet Corner", "area": "Sector 29"},                                                   # no contact
+        {"name": "Chai Stop", "phone": "+91 98100 33333", "area": "Sector 29"},
+        {"name": "Old Place", "phone": "+91 98100 44444", "closed": True},
+    ]
+    path = tmp / "gm.json"
+    path.write_text(_json.dumps(items))
+    cli.DB_PATH, cli.XLSX_PATH = tmp / "gm.db", tmp / "gm.xlsx"
+    cli.load_config = lambda: {"groq_key": ""}
+    args = argparse.Namespace(file=str(path), domain="cafe", city="Gurugram", country="India", area="", count=10, dry_run=False)
+    leads_tool.import_cmd(args)
+
+    conn = store.connect(cli.DB_PATH)
+    names = sorted(r["name"] for r in conn.execute("SELECT name FROM leads"))
+    assert names == ["Blue Door Cafe", "Chai Stop"], names
+    assert store.is_skipped(conn, leads_tool.to_place(items[3])["place_id"]), "no-contact place remembered"
+    rows = list(load_workbook(cli.XLSX_PATH)["Cafes"].iter_rows(values_only=True))
+    assert rows[1][0].startswith("Batch 1") and "(Google Maps)" in rows[1][0]
+    conn.close()
+
+    leads_tool.import_cmd(args)  # same file again: nothing new, no empty batch
+    conn = store.connect(cli.DB_PATH)
+    assert conn.execute("SELECT COUNT(*) FROM leads").fetchone()[0] == 2
+    assert conn.execute("SELECT COUNT(*) FROM batches").fetchone()[0] == 1
+    conn.close()
+
+
 def test_source_routing():
     from lead_hunter import cli
     routes = cli.parse_routes("India:google, portugal : overture")
@@ -350,6 +393,7 @@ if __name__ == "__main__":
         test_geo_helpers()
         test_source_routing()
         test_overture_helpers(Path(tmp))
+        test_gmaps_import(Path(tmp))
         calls = test_city_hunt(Path(tmp))
         print(f"City hunt covered every independent cafe in the fake city using {calls} map searches")
     test_website_analysis()

@@ -246,7 +246,7 @@ def print_skipped(skipped):
         console.print("[dim]Skipped: " + ", ".join(f"{n} {reason}" for reason, n in skipped.most_common()) + "[/]")
 
 
-def save_leads(conn, domain, target_desc, leads, city, country, hunt_id=None):
+def save_leads(conn, domain, target_desc, leads, city, country, hunt_id=None, export=True):
     sheet = excel.sheet_name_for(domain)
     batch_id, _ = store.create_batch(conn, sheet, target_desc)
     today = date.today().isoformat()
@@ -256,7 +256,8 @@ def save_leads(conn, domain, target_desc, leads, city, country, hunt_id=None):
         store.insert_lead(conn, lead)
     store.finalize_batch(conn, batch_id)
     show_top_leads(leads)
-    export_pending(conn)
+    if export:
+        export_pending(conn)
 
 
 def show_top_leads(leads, limit=15):
